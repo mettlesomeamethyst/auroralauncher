@@ -1,0 +1,14 @@
+{
+  "name": "exodus-proxy-intent",
+  "version": "1.0.0",
+  "description": "Proxy for Exodus Privacy with Aurora Store Nightly Intent Trigger",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-fetch": "^3.4.1"
+  },
+  "type": "module"
+}
