@@ -14,7 +14,11 @@ async function proxyRequest(req, res, targetBase, pathPrefix = '') {
     const targetUrl = `${targetBase}${req.originalUrl.replace(pathPrefix, '')}`;
     console.log(`Proxying: ${targetUrl}`);
 
-    const response = await fetch(targetUrl, { method: req.method, headers: req.headers });
+    // Fix Host header to target hostname for TLS validation
+    const headers = { ...req.headers };
+    headers['host'] = new URL(targetBase).host;
+
+    const response = await fetch(targetUrl, { method: req.method, headers });
     res.set('Content-Type', response.headers.get('Content-Type') || '');
     res.status(response.status);
     response.body.pipe(res);
